@@ -1,4 +1,5 @@
 import * as S from './styles'
+import { NextSeo } from 'next-seo'
 import Image from 'next/image'
 import LinkWrapper from 'components/LinkWrapper'
 import { CloseOutline } from '@styled-icons/evaicons-outline/CloseOutline'
@@ -16,6 +17,7 @@ export type PlaceTemplateProps = {
     name: string
     description?: {
       html: string
+      text: string
     }
     gallery: ImageProps[]
   }
@@ -27,6 +29,29 @@ export default function PlacesTemplate({ place }: PlaceTemplateProps) {
 
   return (
     <>
+      <NextSeo
+        title={`${place.name} - Nomad`}
+        description={
+          place.description?.text ||
+          'A simple project to show my favorite places in the world.'
+        }
+        canonical="https://nomad.com"
+        openGraph={{
+          url: 'https://nomad.com',
+          title: `${place.name} - Nomad`,
+          description:
+            place.description?.text ||
+            'A simple project to show my favorite places in the world.',
+          images: [
+            {
+              url: place.gallery[0].url,
+              width: place.gallery[0].width,
+              height: place.gallery[0].height,
+              alt: `${place.name}`
+            }
+          ]
+        }}
+      />
       <LinkWrapper href="/">
         <CloseOutline size={32} aria-label="Go Back to Map" />
       </LinkWrapper>

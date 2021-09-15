@@ -1,6 +1,10 @@
 import { AppProps } from 'next/app'
 import Head from 'next/head'
 import GlobalStyles from 'styles/global'
+import NextNProgress from 'nextjs-progressbar'
+
+import { DefaultSeo } from 'next-seo'
+import SEO from '../next-seo.config'
 
 function App({ Component, pageProps }: AppProps) {
   return (
@@ -22,7 +26,14 @@ function App({ Component, pageProps }: AppProps) {
           content="A simple project to show my favorite places in the world."
         />
       </Head>
+      <DefaultSeo {...SEO} />
       <GlobalStyles />
+      <NextNProgress
+        color="#f231a5"
+        startPosition={0.3}
+        stopDelayMs={200}
+        height={3}
+      />
       <Component {...pageProps} />
     </>
   )
